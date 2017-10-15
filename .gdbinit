@@ -50,11 +50,11 @@ a valid GDB prompt, see the command `python print(gdb.prompt.prompt_help())`""",
                 'doc': """`{status}` when the target program is running.
 See the `prompt` attribute. This value is parsed as a Python format string in
 which `{pid}` is expanded with the process identifier of the target program.""",
-                'default': '\[\e[1;35m\]>>>\[\e[0m\]'
+                'default': '\[\e[35m\]>>>\[\e[0m\]'
             },
             'prompt_not_running': {
                 'doc': '`{status}` when the target program is not running.',
-                'default': '\[\e[1;30m\]>>>\[\e[0m\]'
+                'default': '\[\e[30m\]>>>\[\e[0m\]'
             },
             # divider
             'divider_fill_char_primary': {
@@ -71,11 +71,11 @@ which `{pid}` is expanded with the process identifier of the target program.""",
             },
             'divider_fill_style_secondary': {
                 'doc': 'Style for `divider_fill_char_secondary`',
-                'default': '1;30'
+                'default': '30'
             },
             'divider_label_style_on_primary': {
                 'doc': 'Label style for non-empty primary dividers',
-                'default': '1;33'
+                'default': '33'
             },
             'divider_label_style_on_secondary': {
                 'doc': 'Label style for non-empty secondary dividers',
@@ -87,7 +87,7 @@ which `{pid}` is expanded with the process identifier of the target program.""",
             },
             'divider_label_style_off_secondary': {
                 'doc': 'Label style for empty secondary dividers',
-                'default': '1;30'
+                'default': '30'
             },
             'divider_label_skip': {
                 'doc': 'Gap between the aligning border and the label.',
@@ -108,16 +108,16 @@ which `{pid}` is expanded with the process identifier of the target program.""",
             },
             # common styles
             'style_selected_1': {
-                'default': '1;32'
+                'default': '32'
             },
             'style_selected_2': {
                 'default': '32'
             },
             'style_low': {
-                'default': '1;30'
+                'default': '1'
             },
             'style_high': {
-                'default': '1;37'
+                'default': '0'
             },
             'style_error': {
                 'default': '31'
@@ -199,8 +199,8 @@ class Beautifier():
         try:
             import pygments.lexers
             import pygments.formatters
-            formatter_class = pygments.formatters.Terminal256Formatter
-            self.formatter = formatter_class(style=R.syntax_highlighting)
+            formatter_class = pygments.formatters.TerminalTrueColorFormatter
+            self.formatter = formatter_class(style="default")
             self.lexer = pygments.lexers.get_lexer_for_filename(filename)
             self.active = True
         except ImportError:
